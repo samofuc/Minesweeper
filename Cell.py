@@ -29,10 +29,10 @@ class Cell:
         print("open:" + str(self.open))
         print("mine:" + str(self.mine))
 
-A = Cell()
-A.dump()
-b = Cell(True, True)
-b.dump()
-A.set_open(True)
-A.dump()
+#A = Cell()
+#A.dump()
+#b = Cell(True, True)
+#b.dump()
+#A.set_open(True)
+#A.dump()
 
