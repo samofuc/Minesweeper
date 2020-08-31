@@ -2,28 +2,26 @@
 
 %board.dump()
 
-<form action="/odpri/">
+<form action="/open/" method="POST">
     <h1>Igra</h1>
     <table>
     %for row in range(board.get_height()):
-    <tr onclick="row_indeks(this)">
+    <tr>
         %for col in range(board.get_width()):
-        <td onclick="col_indeks(this)">
+        <td onclick="cell_indeks(this, {{row}}, {{col}})">
         <input type="submit" value="{{board.get_mine(row, col)}}">
         </td>    
         %end
     </tr>
     %end
     </table>
+    <input type="number" id="selected_row" name="selected_row" value="" style="display: none">
+    <input type="number" id="selected_col" name="selected_col" value="" style="display: none">  
 </form>
 <script>
-    function row_indeks(x) {
-        row_idx = x.rowIndex;
-        alert("Row index is:" + row_idx);
-    }
-    function col_indeks(x) {
-        col_idx = x.cellIndex;
-        alert("Coll index is:" + col_idx);
+    function cell_indeks(x, row, col) {
+        document.getElementById("selected_row").value = row;
+        document.getElementById("selected_col").value = col;
     }
 </script>
 
