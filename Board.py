@@ -3,13 +3,11 @@ import random
 
 class Board:
     def __init__(self, width, height, mine_count):
-        print("Tata je care")
         self.width = width
         self.height = height
         self.mine_count = mine_count
         self.board = None
         self.init_board()
-        self.vsota_ponovljenih = 0
 
     def get_width(self):
         return self.width
@@ -79,23 +77,8 @@ class Board:
         return count
 
     def dump_board(self):
-        print("mine")
         for row in range(self.height):
             line = []
             for col in range(self.width):
-                line.append(str(self.get_mine(row, col)))
+                line.append(str(self.board[row][col].get_display_value()))
             print(line)
-
-        print("stevilo bombic")
-        for row in range(self.height):
-            line = []
-            for col in range(self.width):
-                line.append(str(self.get_neighbour_mine_count(row, col)))
-            print(line)
-
-                        
-                        
-#a = Board(3, 4, 3)
-#a.dump()
-b = Board(10, 10, 8)
-b.dump()

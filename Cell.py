@@ -25,6 +25,15 @@ class Cell:
     def set_neighbour_mine_count(self, value):
         self.neighbour_mine_count = value
     
+    def get_display_value(self):
+        if self.open:
+            if self.mine:
+                return "m"
+            else:
+                return str(self.neighbour_mine_count)
+        else:
+            return "x"
+
     def dump(self):
         print("open:" + str(self.open))
         print("mine:" + str(self.mine))

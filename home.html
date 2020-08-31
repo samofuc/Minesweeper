@@ -1,3 +1,54 @@
 %rebase('base.html')
 
-% board.dump()
+%board.dump()
+
+<form action="/odpri/">
+    <h1>Igra</h1>
+    <table>
+    %for row in range(board.get_height()):
+    <tr onclick="row_indeks(this)">
+        %for col in range(board.get_width()):
+        <td onclick="col_indeks(this)">
+        <input type="submit" value="{{board.get_mine(row, col)}}">
+        </td>    
+        %end
+    </tr>
+    %end
+    </table>
+</form>
+<script>
+    function row_indeks(x) {
+        row_idx = x.rowIndex;
+        alert("Row index is:" + row_idx);
+    }
+    function col_indeks(x) {
+        col_idx = x.cellIndex;
+        alert("Coll index is:" + col_idx);
+    }
+</script>
+
+<h1>Mine</h1>
+<table>
+%for row in range(board.get_height()):
+<tr>
+    %for col in range(board.get_width()):
+    <td>
+    <input type="submit" value="{{board.get_mine(row, col)}}">
+    </td>    
+    %end
+</tr>
+%end
+</table>
+
+<h1>Mine v sosedščini</h1>
+<table>
+%for row in range(board.get_height()):
+<tr>
+    %for col in range(board.get_width()):
+    <td>
+    <input type="submit" value="{{board.get_neighbour_mine_count(row, col)}}">
+    </td>    
+    %end
+</tr>
+%end
+</table>
