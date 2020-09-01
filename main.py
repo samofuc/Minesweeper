@@ -9,20 +9,17 @@ def osnovna_stran():
 
 @bottle.post('/open/')
 def open_cell():
-    col = bottle.request.forms['selected_col']
-    row = bottle.request.forms['selected_row']
+    col = int(bottle.request.forms['selected_col'])
+    row = int(bottle.request.forms['selected_row'])
     mouse_button = bottle.request.forms['mouse_button']
 
     if (mouse_button == "left"):
-        print(row)
-        print(col)
+        print(str(row))
+        print(str(col))
         print(mouse_button)
         #board.open(col, row)
     elif (mouse_button == "right"):
-        print(row)
-        print(col)
-        print(mouse_button)
-        board.toggle_marked(int(row), int(col))
+        board.toggle_marked(row, col)
 
     bottle.redirect('/')
 
