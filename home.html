@@ -2,28 +2,47 @@
 
 %board.dump()
 
-<form action="/open/" method="POST">
+<script>
+    function r_click_cell_indeks(event, x, row, col) {
+        if (typeof event ==="object") {
+            switch (event.which) {
+                case 1:
+                    document.getElementById("mouse_button").value = "left";
+                    break;
+                case 3:
+                    document.getElementById("mouse_button").value = "right";
+                    break;
+                default:
+                    return;
+            }
+        }
+        document.getElementById("selected_row").value = row;
+        document.getElementById("selected_col").value = col;
+        document.forms["game"].submit();
+    }
+</script>
+
+<form name="game" action="/open/" method="POST">
     <h1>Igra</h1>
     <table>
     %for row in range(board.get_height()):
     <tr>
         %for col in range(board.get_width()):
-        <td onclick="cell_indeks(this, {{row}}, {{col}})">
-        <input type="submit" value="{{board.get_mine(row, col)}}">
+        <td>
+            <input 
+                type="button" 
+                value="{{board.get_mine(row, col)}}"
+                oncontextmenu="event.preventDefault();" 
+                onmouseup="r_click_cell_indeks(event, this, {{row}}, {{col}})">
         </td>    
         %end
     </tr>
     %end
     </table>
+    <input type="text" id="mouse_button" name="mouse_button" value="" style="display: none">
     <input type="number" id="selected_row" name="selected_row" value="" style="display: none">
     <input type="number" id="selected_col" name="selected_col" value="" style="display: none">  
 </form>
-<script>
-    function cell_indeks(x, row, col) {
-        document.getElementById("selected_row").value = row;
-        document.getElementById("selected_col").value = col;
-    }
-</script>
 
 <h1>Mine</h1>
 <table>
