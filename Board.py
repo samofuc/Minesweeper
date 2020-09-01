@@ -37,7 +37,6 @@ class Board:
         return self.get_cell(row, col).get_marked()
 
     def toggle_marked(self, row, col):
-        print("toggle" + str(row) + str(col))
         self.get_cell(row, col).toggle_marked()
 
     def get_neighbour_mine_count(self, row, col):
@@ -46,6 +45,12 @@ class Board:
     def set_neighbour_mine_count(self, row, col, value):
         self.get_cell(row, col).set_neighbour_mine_count(value)
 
+    def get_visited(self, row, col):
+        self.get_cell(row, col).get_visited()
+
+    def set_visited(self, row, col, value):
+        self.get_cell(row, col).set_visited(value)
+
     def get_display_value(self, row, col):
         return self.get_cell(row, col).get_display_value() 
 
@@ -53,7 +58,6 @@ class Board:
         print("width:" + str(self.width))
         print("height:" + str(self.height))
         print("mine_count:" + str(self.mine_count))
-        #print(self.board.__str__())
         self.dump_board()
 
     def init_board(self):
@@ -102,9 +106,57 @@ class Board:
                 line.append(str(self.get_display_value(row, col)))
             print(line)
 
+    def clear_visited(self):
+        for row in range(self.height):
+            for col in range(self.width):
+                self.set_visited(row, col, False)
+
     def open(self, row, col):
         if self.get_marked(row, col):
             return
+
         if self.get_open(row, col):
             return
+
+        if self.get_mine(row, col):
+            self.set_open(row, col, True)
+            print("Press F to pay respect")
+            return
+
+        if self.get_neighbour_mine_count(row, col) > 0:
+            self.set_open(row, col, True)
+            return
+
+        # celica je prazna
+        self.clear_visited()
         self.set_open(row, col, True)
+        cells_curr = [(row, col)]
+        cells_next = []
+        while len(cells_curr) > 0:
+            for cell in cells_curr:
+                row = cell[0]
+                col = cell[1]
+                for row_idx in range(row - 1, row + 2):
+                    for col_idx in range(col - 1, col + 2):
+                        if (row_idx < 0 or row_idx >= self.height):
+                            continue
+                        if (col_idx < 0 or col_idx >= self.width):
+                            continue
+                        if self.get_visited(row_idx, col_idx):
+                            continue
+                        self.set_visited(row_idx, col_idx, True)
+                        if (row_idx == row and col_idx == col):
+                            continue
+                        if self.get_open(row_idx, col_idx):
+                            continue
+                        if self.get_marked(row_idx, col_idx):
+                            continue
+                        if self.board[row_idx][col_idx].get_mine() == True:
+                            continue
+
+                        self.set_open(row_idx, col_idx, True)
+                        if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
+                            cells_next.append((row_idx, col_idx))
+            
+            cells_curr = cells_next
+            cells_next = []

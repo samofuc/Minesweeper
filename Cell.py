@@ -1,9 +1,10 @@
 class Cell:
-    def __init__(self, open = False, mine = False, marked = False):
+    def __init__(self, open = False, mine = False, marked = False, visited = False):
         self.open = open
         self.mine = mine
         self.marked = marked
         self.neighbour_mine_count = 0
+        self.visited = visited
     
     def __str__(self):
         return "open" + str(self.open) + "mine" + str(self.mine)
@@ -34,6 +35,12 @@ class Cell:
     
     def set_neighbour_mine_count(self, value):
         self.neighbour_mine_count = value
+
+    def get_visited(self):
+        return self.visited
+
+    def set_visited(self, visited):
+        self.visited = visited
     
     def get_display_value(self):
         if self.marked:
