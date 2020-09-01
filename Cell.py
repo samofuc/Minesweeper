@@ -1,7 +1,8 @@
 class Cell:
-    def __init__(self, open = False, mine = False):
+    def __init__(self, open = False, mine = False, marked = False):
         self.open = open
         self.mine = mine
+        self.marked = marked
         self.neighbour_mine_count = 0
     
     def __str__(self):
@@ -18,6 +19,15 @@ class Cell:
 
     def set_mine(self, mine):
         self.mine = mine
+    
+    def get_marked(self):
+        return self.marked
+    
+    def toggle_marked(self):
+        if not self.open:
+            print("marked je" + str(self.marked))
+            self.marked = not self.marked
+        print("marked je" + str(self.marked))
 
     def get_neighbour_mine_count(self):
         return self.neighbour_mine_count
@@ -26,7 +36,9 @@ class Cell:
         self.neighbour_mine_count = value
     
     def get_display_value(self):
-        if self.open:
+        if self.marked:
+            return "O"
+        elif self.open:
             if self.mine:
                 return "m"
             else:

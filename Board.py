@@ -18,17 +18,30 @@ class Board:
     def get_mine_count(self):
         return self.mine_count
 
+    def get_cell(self, row, col):
+        return self.board[row][col]
+
     def set_mine(self, row, col, value):
-        self.board[row][col].set_mine(value)
+        self.get_cell(row, col).set_mine(value)
 
     def get_mine(self, row, col):
-        return self.board[row][col].get_mine()
+        return self.get_cell(row, col).get_mine()
+
+    def get_marked(self, row, col):
+        return self.get_cell(row, col).get_marked()
+
+    def toggle_marked(self, row, col):
+        print("toggle" + str(row) + str(col))
+        self.get_cell(row, col).toggle_marked()
 
     def set_neighbour_mine_count(self, row, col, value):
-        self.board[row][col].set_neighbour_mine_count(value)
+        self.get_cell(row, col).set_neighbour_mine_count(value)
 
     def get_neighbour_mine_count(self, row, col):
-        return self.board[row][col].get_neighbour_mine_count() 
+        return self.get_cell(row, col).get_neighbour_mine_count() 
+
+    def get_display_value(self, row, col):
+        return self.get_cell(row, col).get_display_value() 
 
     def dump(self):
         print("width:" + str(self.width))
@@ -80,5 +93,5 @@ class Board:
         for row in range(self.height):
             line = []
             for col in range(self.width):
-                line.append(str(self.board[row][col].get_display_value()))
+                line.append(str(self.get_display_value(row, col)))
             print(line)

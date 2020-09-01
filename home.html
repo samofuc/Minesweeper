@@ -31,7 +31,7 @@
         <td>
             <input 
                 type="button" 
-                value="{{board.get_mine(row, col)}}"
+                value="{{board.get_display_value(row, col)}}"
                 oncontextmenu="event.preventDefault();" 
                 onmouseup="r_click_cell_indeks(event, this, {{row}}, {{col}})">
         </td>    
