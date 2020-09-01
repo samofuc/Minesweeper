@@ -21,11 +21,17 @@ class Board:
     def get_cell(self, row, col):
         return self.board[row][col]
 
+    def get_mine(self, row, col):
+        return self.get_cell(row, col).get_mine()
+
     def set_mine(self, row, col, value):
         self.get_cell(row, col).set_mine(value)
 
-    def get_mine(self, row, col):
-        return self.get_cell(row, col).get_mine()
+    def get_open(self, row, col):
+        return self.get_cell(row, col).get_open()
+    
+    def set_open(self, row, col, value):
+        self.get_cell(row, col).set_open(value)
 
     def get_marked(self, row, col):
         return self.get_cell(row, col).get_marked()
@@ -34,11 +40,11 @@ class Board:
         print("toggle" + str(row) + str(col))
         self.get_cell(row, col).toggle_marked()
 
-    def set_neighbour_mine_count(self, row, col, value):
-        self.get_cell(row, col).set_neighbour_mine_count(value)
-
     def get_neighbour_mine_count(self, row, col):
         return self.get_cell(row, col).get_neighbour_mine_count() 
+
+    def set_neighbour_mine_count(self, row, col, value):
+        self.get_cell(row, col).set_neighbour_mine_count(value)
 
     def get_display_value(self, row, col):
         return self.get_cell(row, col).get_display_value() 
@@ -95,3 +101,10 @@ class Board:
             for col in range(self.width):
                 line.append(str(self.get_display_value(row, col)))
             print(line)
+
+    def open(self, row, col):
+        if self.get_marked(row, col):
+            return
+        if self.get_open(row, col):
+            return
+        self.set_open(row, col, True)

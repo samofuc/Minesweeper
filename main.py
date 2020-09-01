@@ -14,10 +14,7 @@ def open_cell():
     mouse_button = bottle.request.forms['mouse_button']
 
     if (mouse_button == "left"):
-        print(str(row))
-        print(str(col))
-        print(mouse_button)
-        #board.open(col, row)
+        board.open(row, col)
     elif (mouse_button == "right"):
         board.toggle_marked(row, col)
 
