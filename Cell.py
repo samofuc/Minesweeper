@@ -26,9 +26,7 @@ class Cell:
     
     def toggle_marked(self):
         if not self.open:
-            print("marked je" + str(self.marked))
             self.marked = not self.marked
-        print("marked je" + str(self.marked))
 
     def get_neighbour_mine_count(self):
         return self.neighbour_mine_count

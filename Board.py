@@ -7,6 +7,7 @@ class Board:
         self.height = height
         self.mine_count = mine_count
         self.board = None
+        self.remaining_mine_count = mine_count
         self.init_board()
 
     def get_width(self):
@@ -38,6 +39,13 @@ class Board:
 
     def toggle_marked(self, row, col):
         self.get_cell(row, col).toggle_marked()
+        if self.get_marked(row, col):
+            self.remaining_mine_count -= 1
+        else:
+            self.remaining_mine_count += 1
+    
+    def get_remaining_mine_count(self):
+        return self.remaining_mine_count
 
     def get_neighbour_mine_count(self, row, col):
         return self.get_cell(row, col).get_neighbour_mine_count() 
@@ -159,4 +167,3 @@ class Board:
             
             cells_curr = cells_next
             cells_next = []
-            

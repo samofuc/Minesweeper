@@ -24,6 +24,8 @@
     <input type="submit" value="New game">
 </form>
 
+<p>Stevilo preostalih min: {{board.get_remaining_mine_count()}}</p>
+
 <form name="game" action="/open/" method="POST">
     <h1>Igra</h1>
     <table>
