@@ -20,6 +20,8 @@ def open_cell():
 
     if (mouse_button == "left"):
         board.open(row, col)
+    elif (mouse_button == "middle"):
+        board.open_neighbours(row, col)
     elif (mouse_button == "right"):
         board.toggle_marked(row, col)
 

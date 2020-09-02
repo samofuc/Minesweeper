@@ -167,3 +167,7 @@ class Board:
             
             cells_curr = cells_next
             cells_next = []
+
+    def open_neighbours(self, row, col):
+        print("dela middle button")
+        
