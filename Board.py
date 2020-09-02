@@ -74,7 +74,6 @@ class Board:
         while (count > 0):
             row_idx = random.randrange(0, self.height, 1)
             col_idx = random.randrange(0, self.width, 1)
-            print(str(row_idx) + "," + str(col_idx))
             if (not self.get_mine(row_idx, col_idx)):
                 self.set_mine(row_idx, col_idx, True)
                 count = count - 1
@@ -160,3 +159,4 @@ class Board:
             
             cells_curr = cells_next
             cells_next = []
+            

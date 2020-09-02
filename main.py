@@ -7,6 +7,11 @@ board = Board.Board(15,15,40)
 def osnovna_stran():
     return bottle.template('home.html', board=board)
 
+@bottle.post('/new/')
+def new_game():
+    board.init_board()
+    bottle.redirect('/')
+
 @bottle.post('/open/')
 def open_cell():
     col = int(bottle.request.forms['selected_col'])
@@ -21,3 +26,4 @@ def open_cell():
     bottle.redirect('/')
 
 bottle.run(debug=True, reloader=True)
+
