@@ -105,6 +105,20 @@ class Board:
                 if self.board[row_idx][col_idx].get_mine() == True:
                     count += 1
         return count
+    
+    def get_neighbour_marked_count(self, row, col):
+        count = 0
+        for row_idx in range(row - 1, row + 2):
+            for col_idx in range(col - 1, col + 2):
+                if (row_idx < 0 or row_idx >= self.height):
+                    continue
+                if (col_idx < 0 or col_idx >= self.width):
+                    continue
+                if (row_idx == row and col_idx == col):
+                    continue
+                if self.get_marked(row_idx, col_idx):
+                    count += 1
+        return count
 
     def dump_board(self):
         for row in range(self.height):
@@ -126,9 +140,9 @@ class Board:
             return
 
         if self.get_mine(row, col):
-            self.odprimo_vse_mine(row, col)
+            self.explode(row, col)
             return
-            
+
         if self.get_neighbour_mine_count(row, col) > 0:
             self.set_open(row, col, True)
             return
@@ -168,36 +182,23 @@ class Board:
             cells_next = []
 
     def open_neighbours(self, row, col):
-        if self.get_open(row, col):
-            stevec = 0
-            for row_idx in range(row - 1, row + 2):
-                for col_idx in range(col - 1, col + 2):
-                    if (row_idx < 0 or row_idx >= self.height):
-                        continue
-                    if (col_idx < 0 or col_idx >= self.width):
-                        continue
-                    if (row_idx == row and col_idx == col):
-                        continue
-                    if self.get_marked(row_idx, col_idx):
-                        stevec += 1
-            if stevec == self.get_neighbour_mine_count(row, col):
-                for row_idx in range(row - 1, row + 2):
-                    for col_idx in range(col - 1, col + 2):
-                        if (row_idx < 0 or row_idx >= self.height):
-                            continue
-                        if (col_idx < 0 or col_idx >= self.width):
-                            continue
-                        if self.get_open(row_idx, col_idx):
-                            continue
-                        if self.get_marked(row_idx, col_idx):
-                            continue
-                        self.set_open(row_idx, col_idx, True)
-            else:
-                print("ne moremo odpreti celice")
-        else:
-            print("123456")
+        if not self.get_open(row, col):
+            return
+        if self.get_neighbour_marked_count(row, col) != self.get_neighbour_mine_count(row, col):
+            return
+        for row_idx in range(row - 1, row + 2):
+            for col_idx in range(col - 1, col + 2):
+                if (row_idx < 0 or row_idx >= self.height):
+                    continue
+                if (col_idx < 0 or col_idx >= self.width):
+                    continue
+                if self.get_open(row_idx, col_idx):
+                    continue
+                if self.get_marked(row_idx, col_idx):
+                    continue
+                self.set_open(row_idx, col_idx, True)
 
-    def odprimo_vse_mine(self, row, col):
+    def explode(self, row, col):
         for row_idx in range(self.height):
             for col_idx in range(self.width):
                 if self.get_mine(row_idx, col_idx):
