@@ -126,10 +126,9 @@ class Board:
             return
 
         if self.get_mine(row, col):
-            self.set_open(row, col, True)
-            print("Press F to pay respect")
+            self.odprimo_vse_mine(row, col)
             return
-
+            
         if self.get_neighbour_mine_count(row, col) > 0:
             self.set_open(row, col, True)
             return
@@ -197,6 +196,12 @@ class Board:
                 print("ne moremo odpreti celice")
         else:
             print("123456")
+
+    def odprimo_vse_mine(self, row, col):
+        for row_idx in range(self.height):
+            for col_idx in range(self.width):
+                if self.get_mine(row_idx, col_idx):
+                    self.set_open(row_idx, col_idx, True)
 
 
 
