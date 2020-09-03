@@ -1,7 +1,7 @@
 import bottle
 import Board
 
-board = Board.Board(15,15,40)
+board = Board.Board(15,15,70)
 
 @bottle.get('/')
 def osnovna_stran():
