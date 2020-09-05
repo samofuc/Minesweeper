@@ -20,7 +20,7 @@ def osnovna_stran():
 
 @bottle.post('/new/')
 def new_game():
-    board.init_board()
+    board.init(15, 15, 40)
     bottle.redirect('/')
 
 @bottle.post('/open/')

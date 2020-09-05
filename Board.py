@@ -3,12 +3,7 @@ import random
 
 class Board:
     def __init__(self, width, height, mine_count):
-        self.width = width
-        self.height = height
-        self.mine_count = mine_count
-        self.board = None
-        self.remaining_mine_count = mine_count
-        self.init_board()
+        self.init(width, height, mine_count)
 
     def get_width(self):
         return self.width
@@ -67,7 +62,13 @@ class Board:
     def set_visited(self, row, col, value):
         self.get_cell(row, col).set_visited(value)
 
-    def init_board(self):
+    def init(self, width, height, mine_count):
+        self.width = width
+        self.height = height
+        self.mine_count = mine_count
+        self.board = None
+        self.remaining_mine_count = mine_count
+
         #naredimo igralno plosco
         self.board = []
         for i in range(self.height):
@@ -192,6 +193,7 @@ class Board:
                 if (row_idx < 0 or row_idx >= self.height):
                     continue
                 if (col_idx < 0 or col_idx >= self.width):
+
                     continue
                 if self.get_open(row_idx, col_idx):
                     continue
