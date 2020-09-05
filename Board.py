@@ -174,7 +174,7 @@ class Board:
                             continue
                         if self.board[row_idx][col_idx].get_mine() == True:
                             continue
-
+                            
                         self.set_open(row_idx, col_idx, True)
                         if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
                             cells_next.append((row_idx, col_idx))
@@ -193,7 +193,6 @@ class Board:
                 if (row_idx < 0 or row_idx >= self.height):
                     continue
                 if (col_idx < 0 or col_idx >= self.width):
-
                     continue
                 if self.get_open(row_idx, col_idx):
                     continue
@@ -202,6 +201,8 @@ class Board:
                 if self.get_mine(row_idx, col_idx):
                     self.set_exploded(row_idx, col_idx, True)
                     mine_exploded = True
+                if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
+                    self.open(row_idx, col_idx)
                 self.set_open(row_idx, col_idx, True)
         if mine_exploded:
             self.on_game_lost()
