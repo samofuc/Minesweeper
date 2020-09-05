@@ -37,17 +37,28 @@
     <tr>
         %for col in range(board.get_width()):
         <td>
-            %css_class = "closed"
-            %if board.get_marked(row, col):
-            %    css_class = "marked"
-            %elif board.get_open(row, col):
+            %if board.get_open(row, col):
             %    if board.get_mine(row, col):
-            %        css_class = "bombdeath"
+            %       if board.get_exploded(row, col):
+            %           css_class = "bombdeath"            
+            %       elif board.get_marked(row, col):
+            %           css_class = "marked"
+            %       else:
+            %           css_class = "bombrevealed"
+            %       end
             %    else:
-            %        css_class =  "open" + str(board.get_neighbour_mine_count(row, col))
+            %       if board.get_marked(row, col):
+            %           css_class = "bombmisflagged"
+            %        else:
+            %           css_class =  "open" + str(board.get_neighbour_mine_count(row, col))
+            %       end
             %    end
             %else:
-            %    css_class = "closed"
+            %    if board.get_marked(row, col):
+            %       css_class ="marked"
+            %    else:
+            %       css_class = "closed"
+            %    end
             %end
             <div
                 oncontextmenu="event.preventDefault();"

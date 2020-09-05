@@ -1,10 +1,11 @@
 class Cell:
-    def __init__(self, open = False, mine = False, marked = False, visited = False):
+    def __init__(self, open = False, mine = False, marked = False, visited = False, exploded = False):
         self.open = open
         self.mine = mine
         self.marked = marked
         self.neighbour_mine_count = 0
         self.visited = visited
+        self.exploded = exploded
     
     def __str__(self):
         return "open" + str(self.open) + "mine" + str(self.mine)
@@ -39,19 +40,9 @@ class Cell:
 
     def set_visited(self, visited):
         self.visited = visited
-    
-    def get_display_value(self):
-        if self.marked:
-            return "O"
-        elif self.open:
-            if self.mine:
-                return "m"
-            else:
-                return str(self.neighbour_mine_count)
-        else:
-            return "x"
 
-    def dump(self):
-        print("open:" + str(self.open))
-        print("mine:" + str(self.mine))
+    def get_exploded(self):
+        return self.exploded
 
+    def set_exploded(self, value):
+        self.exploded = value

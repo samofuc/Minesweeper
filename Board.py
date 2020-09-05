@@ -28,6 +28,12 @@ class Board:
     def set_mine(self, row, col, value):
         self.get_cell(row, col).set_mine(value)
 
+    def get_exploded(self, row, col):
+        return self.get_cell(row, col).get_exploded()
+
+    def set_exploded(self, row, col, value):
+        self.get_cell(row, col).set_exploded(value)
+
     def get_open(self, row, col):
         return self.get_cell(row, col).get_open()
     
@@ -38,6 +44,8 @@ class Board:
         return self.get_cell(row, col).get_marked()
 
     def toggle_marked(self, row, col):
+        if self.get_open(row, col):
+            return
         self.get_cell(row, col).toggle_marked()
         if self.get_marked(row, col):
             self.remaining_mine_count -= 1
@@ -58,15 +66,6 @@ class Board:
 
     def set_visited(self, row, col, value):
         self.get_cell(row, col).set_visited(value)
-
-    def get_display_value(self, row, col):
-        return self.get_cell(row, col).get_display_value() 
-
-    def dump(self):
-        print("width:" + str(self.width))
-        print("height:" + str(self.height))
-        print("mine_count:" + str(self.mine_count))
-        self.dump_board()
 
     def init_board(self):
         #naredimo igralno plosco
@@ -199,10 +198,14 @@ class Board:
                 self.set_open(row_idx, col_idx, True)
 
     def explode(self, row, col):
+        self.set_exploded(row, col, True)
         for row_idx in range(self.height):
             for col_idx in range(self.width):
                 if self.get_mine(row_idx, col_idx):
                     self.set_open(row_idx, col_idx, True)
+                else:
+                    if self.get_marked(row_idx, col_idx):
+                        self.set_open(row_idx, col_idx, True)
 
 
 
