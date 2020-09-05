@@ -139,7 +139,8 @@ class Board:
             return
 
         if self.get_mine(row, col):
-            self.explode(row, col)
+            self.set_exploded(row, col, True)
+            self.on_game_lost()
             return
 
         if self.get_neighbour_mine_count(row, col) > 0:
@@ -185,6 +186,7 @@ class Board:
             return
         if self.get_neighbour_marked_count(row, col) != self.get_neighbour_mine_count(row, col):
             return
+        mine_exploded = False
         for row_idx in range(row - 1, row + 2):
             for col_idx in range(col - 1, col + 2):
                 if (row_idx < 0 or row_idx >= self.height):
@@ -195,10 +197,14 @@ class Board:
                     continue
                 if self.get_marked(row_idx, col_idx):
                     continue
+                if self.get_mine(row_idx, col_idx):
+                    self.set_exploded(row_idx, col_idx, True)
+                    mine_exploded = True
                 self.set_open(row_idx, col_idx, True)
+        if mine_exploded:
+            self.on_game_lost()
 
-    def explode(self, row, col):
-        self.set_exploded(row, col, True)
+    def on_game_lost(self):
         for row_idx in range(self.height):
             for col_idx in range(self.width):
                 if self.get_mine(row_idx, col_idx):
@@ -206,8 +212,4 @@ class Board:
                 else:
                     if self.get_marked(row_idx, col_idx):
                         self.set_open(row_idx, col_idx, True)
-
-
-
-        
-        
+     
