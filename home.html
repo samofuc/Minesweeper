@@ -1,13 +1,14 @@
 %rebase('base.html')
 
 <script>
-    function r_click_cell_indeks(event, x, row, col) {
+    function mouse_click(event, x, row, col) {
         if (typeof event ==="object") {
             switch (event.which) {
                 case 1:
                     document.getElementById("mouse_button").value = "left";
                     break;
                 case 2:
+                    event.preventDefault();
                     document.getElementById("mouse_button").value = "middle";
                     break;
                 case 3:
@@ -36,11 +37,22 @@
     <tr>
         %for col in range(board.get_width()):
         <td>
-            <input 
-                type="button" 
-                value="{{board.get_display_value(row, col)}}"
-                oncontextmenu="event.preventDefault();" 
-                onmouseup="r_click_cell_indeks(event, this, {{row}}, {{col}})">
+            %css_class = "closed"
+            %if board.get_marked(row, col):
+            %    css_class = "marked"
+            %elif board.get_open(row, col):
+            %    if board.get_mine(row, col):
+            %        css_class = "bombdeath"
+            %    else:
+            %        css_class =  "open" + str(board.get_neighbour_mine_count(row, col))
+            %    end
+            %else:
+            %    css_class = "closed"
+            %end
+            <div
+                oncontextmenu="event.preventDefault();"
+                onmouseup="mouse_click(event, this, {{row}}, {{col}})"
+                class="{{css_class}}">
         </td>    
         %end
     </tr>
@@ -50,7 +62,7 @@
     <input type="number" id="selected_row" name="selected_row" value="" style="display: none">
     <input type="number" id="selected_col" name="selected_col" value="" style="display: none">  
 </form>
-
+<!--
 <h1>Mine</h1>
 <table>
 %for row in range(board.get_height()):
@@ -76,3 +88,4 @@
 </tr>
 %end
 </table>
+-->
