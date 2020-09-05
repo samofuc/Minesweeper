@@ -28,97 +28,97 @@
     width: 16px;
     height: 16px
 }
- .open5 {
+.open5 {
     background-image: url('sprite.gif');
     background-position: -80px -23px;
     width: 16px;
     height: 16px
 }
- .open6 {
+.open6 {
     background-image: url('sprite.gif');
     background-position: -96px -23px;
     width: 16px;
     height: 16px
 }
- .open7 {
+.open7 {
     background-image: url('sprite.gif');
     background-position: -112px -23px;
     width: 16px;
     height: 16px
 }
- .open8 {
+.open8 {
     background-image: url('sprite.gif');
     background-position: -128px -23px;
     width: 16px;
     height: 16px
 }
- .closed {
+.closed {
     background-image: url('sprite.gif');
     background-position: 0 -39px;
     width: 16px;
     height: 16px
 }
- .marked {
+.marked {
     background-image: url('sprite.gif');
     background-position: -16px -39px;
     width: 16px;
     height: 16px
 }
- .bombdeath {
+.bombdeath {
     background-image: url('sprite.gif');
     background-position: -32px -39px;
     width: 16px;
     height: 16px
 }
- .bombmisflagged {
+.bombmisflagged {
     background-image: url('sprite.gif');
     background-position: -48px -39px;
     width: 16px;
     height: 16px
 }
- .bombrevealed {
+.bombrevealed {
     background-image: url('sprite.gif');
     background-position: -64px -39px;
     width: 16px;
     height: 16px
 }
- .question {
+.question {
     background-image: url('sprite.gif');
     background-position: -80px -39px;
     width: 16px;
     height: 16px
 }
- .questionpressed {
+.questionpressed {
     background-image: url('sprite.gif');
     background-position: -96px -39px;
     width: 16px;
     height: 16px
 }
- .facesmile {
+.facesmile {
     background-image: url('sprite.gif');
     background-position: 0 -55px;
     width: 26px;
     height: 26px
 }
- .facepressed {
+.facepressed {
     background-image: url('sprite.gif');
     background-position: -26px -55px;
     width: 26px;
     height: 26px
 }
- .faceooh {
+.faceooh {
     background-image: url('sprite.gif');
     background-position: -52px -55px;
     width: 26px;
     height: 26px
 }
- .facedead {
+.facedead {
     background-image: url('sprite.gif');
     background-position: -78px -55px;
     width: 26px;
     height: 26px
 }
- .facewin {
+.facewin {
     background-image: url('sprite.gif');
     background-position: -104px -55px;
     width: 26px;
