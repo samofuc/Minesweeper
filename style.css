@@ -1,0 +1,126 @@
+.open0 {
+    background-image: url('sprite.gif');
+    background-position: 0 -23px;
+    width: 16px;
+    height: 16px
+}
+.open1 {
+    background-image: url('sprite.gif');
+    background-position: -16px -23px;
+    width: 16px;
+    height: 16px
+}
+.open2 {
+    background-image: url('sprite.gif');
+    background-position: -32px -23px;
+    width: 16px;
+    height: 16px
+}
+.open3 {
+    background-image: url('sprite.gif');
+    background-position: -48px -23px;
+    width: 16px;
+    height: 16px
+}
+ .open4 {
+    background-image: url('sprite.gif');
+    background-position: -64px -23px;
+    width: 16px;
+    height: 16px
+}
+ .open5 {
+    background-image: url('sprite.gif');
+    background-position: -80px -23px;
+    width: 16px;
+    height: 16px
+}
+ .open6 {
+    background-image: url('sprite.gif');
+    background-position: -96px -23px;
+    width: 16px;
+    height: 16px
+}
+ .open7 {
+    background-image: url('sprite.gif');
+    background-position: -112px -23px;
+    width: 16px;
+    height: 16px
+}
+ .open8 {
+    background-image: url('sprite.gif');
+    background-position: -128px -23px;
+    width: 16px;
+    height: 16px
+}
+ .closed {
+    background-image: url('sprite.gif');
+    background-position: 0 -39px;
+    width: 16px;
+    height: 16px
+}
+ .marked {
+    background-image: url('sprite.gif');
+    background-position: -16px -39px;
+    width: 16px;
+    height: 16px
+}
+ .bombdeath {
+    background-image: url('sprite.gif');
+    background-position: -32px -39px;
+    width: 16px;
+    height: 16px
+}
+ .bombmisflagged {
+    background-image: url('sprite.gif');
+    background-position: -48px -39px;
+    width: 16px;
+    height: 16px
+}
+ .bombrevealed {
+    background-image: url('sprite.gif');
+    background-position: -64px -39px;
+    width: 16px;
+    height: 16px
+}
+ .question {
+    background-image: url('sprite.gif');
+    background-position: -80px -39px;
+    width: 16px;
+    height: 16px
+}
+ .questionpressed {
+    background-image: url('sprite.gif');
+    background-position: -96px -39px;
+    width: 16px;
+    height: 16px
+}
+ .facesmile {
+    background-image: url('sprite.gif');
+    background-position: 0 -55px;
+    width: 26px;
+    height: 26px
+}
+ .facepressed {
+    background-image: url('sprite.gif');
+    background-position: -26px -55px;
+    width: 26px;
+    height: 26px
+}
+ .faceooh {
+    background-image: url('sprite.gif');
+    background-position: -52px -55px;
+    width: 26px;
+    height: 26px
+}
+ .facedead {
+    background-image: url('sprite.gif');
+    background-position: -78px -55px;
+    width: 26px;
+    height: 26px
+}
+ .facewin {
+    background-image: url('sprite.gif');
+    background-position: -104px -55px;
+    width: 26px;
+    height: 26px
+}
