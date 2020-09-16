@@ -60,10 +60,16 @@
             %       css_class = "closed"
             %    end
             %end
+            %if board.is_game_in_progress():
             <div
                 oncontextmenu="event.preventDefault();"
                 onmouseup="mouse_click(event, this, {{row}}, {{col}})"
                 class="{{css_class}}">
+            %else:
+            <div
+                oncontextmenu="event.preventDefault();"
+                class="{{css_class}}">
+            %end
         </td>    
         %end
     </tr>

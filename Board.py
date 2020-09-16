@@ -1,7 +1,9 @@
 import Cell
 import random
+import GameStatus
 
 class Board:
+
     def __init__(self, width, height, mine_count):
         self.init(width, height, mine_count)
 
@@ -28,6 +30,7 @@ class Board:
 
     def set_exploded(self, row, col, value):
         self.get_cell(row, col).set_exploded(value)
+        self.status = GameStatus.GameStatus.Failure
 
     def get_open(self, row, col):
         return self.get_cell(row, col).get_open()
@@ -62,12 +65,16 @@ class Board:
     def set_visited(self, row, col, value):
         self.get_cell(row, col).set_visited(value)
 
+    def is_game_in_progress(self):
+        return (self.status == GameStatus.GameStatus.InProgress)
+
     def init(self, width, height, mine_count):
         self.width = width
         self.height = height
         self.mine_count = mine_count
         self.board = None
         self.remaining_mine_count = mine_count
+        self.status = GameStatus.GameStatus.InProgress
 
         #naredimo igralno plosco
         self.board = []
