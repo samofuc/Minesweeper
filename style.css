@@ -124,3 +124,71 @@
     width: 26px;
     height: 26px
 }
+
+div.look {
+    border:5px red;
+    background-color: grey;
+}
+
+.bordertl {
+    background-image: url('sprite.gif');
+	background-position: 0 -81px;
+	width: 10px;
+    height: 10px
+}
+
+.bordertr {
+    background-image: url('sprite.gif');
+	background-position: -10px -81px;
+	width: 10px;
+	height: 10px
+}
+
+.borderbl {
+    background-image: url('sprite.gif');
+    background-position: -134px -39px;
+	width: 10px;
+    height: 16px
+}
+
+.borderbr {
+    background-image: url('sprite.gif');
+	background-position: -30px -81px;
+	width: 10px;
+	height: 10px
+}
+
+.bordertb {
+    background-image: url('sprite.gif');
+	background-position: -40px -81px;
+	width: 16px;
+	height: 10px
+}
+
+.borderjointl {
+    background-image: url('sprite.gif');
+	background-position: -56px -81px;
+	width: 10px;
+	height: 10px
+}
+
+.borderjointr {
+    background-image: url('sprite.gif');
+	background-position: -66px -81px;
+	width: 10px;
+	height: 10px
+}
+
+.borderlr {
+    background-image: url('sprite.gif');
+	background-position: -134px -39px;
+	width: 10px;
+    height: 16px
+}
+
+.borderlrlong {
+    background-image: url('sprite.gif');
+	background-position: -134px -39px;
+	width: 10px;
+	height: 32px
+}

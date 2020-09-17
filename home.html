@@ -1,5 +1,4 @@
 %rebase('base.html')
-
 <script>
     function mouse_click(event, x, row, col) {
         if (typeof event ==="object") {
@@ -35,6 +34,9 @@
     <table cellspacing=0 cellpadding=0>
     %for row in range(board.get_height()):
     <tr>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="borderlr">
+        </td>
         %for col in range(board.get_width()):
         <td>
             %if board.get_open(row, col):
@@ -72,6 +74,9 @@
             %end
         </td>    
         %end
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="borderlr">
+        </td>
     </tr>
     %end
     </table>
@@ -79,30 +84,3 @@
     <input type="number" id="selected_row" name="selected_row" value="" style="display: none">
     <input type="number" id="selected_col" name="selected_col" value="" style="display: none">  
 </form>
-<!--
-<h1>Mine</h1>
-<table>
-%for row in range(board.get_height()):
-<tr>
-    %for col in range(board.get_width()):
-    <td>
-    <input type="submit" value="{{board.get_mine(row, col)}}">
-    </td>    
-    %end
-</tr>
-%end
-</table>
-
-<h1>Mine v sosedščini</h1>
-<table>
-%for row in range(board.get_height()):
-<tr>
-    %for col in range(board.get_width()):
-    <td>
-    <input type="submit" value="{{board.get_neighbour_mine_count(row, col)}}">
-    </td>    
-    %end
-</tr>
-%end
-</table>
--->
