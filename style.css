@@ -115,7 +115,7 @@
     background-position: 0 -55px;
     width: 26px;
     height: 26px;
-    margin: auto;
+    margin: auto
 }
 
 .facepressed {
@@ -285,3 +285,35 @@
 	width: 13px;
 	height: 23px
 }
+
+.mines_hundreds {
+    margin: 4px 0 5px 6px;
+    float: left;
+}
+
+.mines_tens {
+    margin: 4px 0 5px 0;
+    float: left;
+}
+
+.mines_ones {
+    margin: 4px 0 5px 0;
+    float: left;
+}
+
+.seconds_hundreds {
+    margin: 4px 0 5px 0;
+    float: left
+}
+
+.seconds_tens {
+    margin: 4px 0 5px 0;
+    float: left
+}
+
+.seconds_ones {
+    margin: 4px 6px 5px 0;
+    float: left
+}
+
+

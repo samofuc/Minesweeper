@@ -65,14 +65,10 @@
         %end
         %time10 = "time" + str(t10)
         %time1 = "time" + str(t1)
-        <td>
-            <div oncontextmenu="event.preventDefault();" class="{{time100}}"></div>
-        </td>
-        <td>
-            <div oncontextmenu="event.preventDefault();" class="{{time10}}"></div>
-        </td>
-        <td>
-            <div oncontextmenu="event.preventDefault();" class="{{time1}}"></div>
+        <td colspan="3">
+            <div oncontextmenu="event.preventDefault();" class="{{time100}} mines_hundreds"></div>
+            <div oncontextmenu="event.preventDefault();" class="{{time10}} mines_tens"></div>
+            <div oncontextmenu="event.preventDefault();" class="{{time1}} mines_ones"></div>
         </td>
         %cells_together = board.get_width() - 6
         <td colspan="{{cells_together}}">
@@ -81,14 +77,10 @@
                 onmouseup="new_game_click(event, this)"
                 class="facesmile">
         </td>
-        <td>
-            <div oncontextmenu="event.preventDefault();" class="time0"></div>
-        </td>
-        <td>
-            <div oncontextmenu="event.preventDefault();" class="time0"></div>
-        </td>
-        <td>
-            <div oncontextmenu="event.preventDefault();" class="time0"></div>
+        <td colspan="3">
+            <div oncontextmenu="event.preventDefault();" class="time0 seconds_hundreds"></div>
+            <div oncontextmenu="event.preventDefault();" class="time0 seconds_tens"></div>
+            <div oncontextmenu="event.preventDefault();" class="time0 seconds_ones"></div>
         </td>
         <td>
             <div oncontextmenu="event.preventDefault();" class="borderlrlong"></div>
