@@ -72,15 +72,22 @@
         </td>
         %cells_together = board.get_width() - 6
         <td colspan="{{cells_together}}" class="blank">
+            %if board.is_game_in_progress():
+            %   css_class = "facesmile"
+            %elif board.is_game_won():
+            %   css_class = "facewin"
+            %else:
+            %   css_class = "facedead"
+            %end
             <div
                 oncontextmenu="event.preventDefault();" 
                 onmouseup="new_game_click(event, this)"
-                class="facesmile">
+                class="{{css_class}}">
         </td>
         <td colspan="3" class="blank">
-            <div oncontextmenu="event.preventDefault();" class="time0 seconds_hundreds"></div>
-            <div oncontextmenu="event.preventDefault();" class="time0 seconds_tens"></div>
-            <div oncontextmenu="event.preventDefault();" class="time0 seconds_ones"></div>
+            <div oncontextmenu="event.preventDefault();" class="time- seconds_hundreds"></div>
+            <div oncontextmenu="event.preventDefault();" class="time- seconds_tens"></div>
+            <div oncontextmenu="event.preventDefault();" class="time- seconds_ones"></div>
         </td>
         <td>
             <div oncontextmenu="event.preventDefault();" class="borderlrlong"></div>

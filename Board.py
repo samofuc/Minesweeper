@@ -68,6 +68,23 @@ class Board:
     def is_game_in_progress(self):
         return (self.status == GameStatus.GameStatus.InProgress)
 
+    def is_game_won(self):
+        return (self.status == GameStatus.GameStatus.Success)
+    
+    def check_status_success(self):
+        for row in range(self.height):
+            for col in range(self.width):
+                if self.get_open(row, col):
+                    continue
+                elif self.get_marked(row, col):
+                    if self.get_mine(row, col):
+                        continue
+                    else:
+                        return
+                else:
+                    return
+        self.status = GameStatus.GameStatus.Success
+
     def init(self, width, height, mine_count):
         self.width = width
         self.height = height
@@ -140,79 +157,85 @@ class Board:
                 self.set_visited(row, col, False)
 
     def open(self, row, col):
-        if self.get_marked(row, col):
-            return
+        try:   
+            if self.get_marked(row, col):
+                return
 
-        if self.get_open(row, col):
-            return
+            if self.get_open(row, col):
+                return
 
-        if self.get_mine(row, col):
-            self.set_exploded(row, col, True)
-            self.on_game_lost()
-            return
+            if self.get_mine(row, col):
+                self.set_exploded(row, col, True)
+                self.on_game_lost()
+                return
 
-        if self.get_neighbour_mine_count(row, col) > 0:
+            if self.get_neighbour_mine_count(row, col) > 0:
+                self.set_open(row, col, True)
+                return
+
+            # celica je prazna
+            self.clear_visited()
             self.set_open(row, col, True)
-            return
-
-        # celica je prazna
-        self.clear_visited()
-        self.set_open(row, col, True)
-        cells_curr = [(row, col)]
-        cells_next = []
-        while len(cells_curr) > 0:
-            for cell in cells_curr:
-                row = cell[0]
-                col = cell[1]
-                for row_idx in range(row - 1, row + 2):
-                    for col_idx in range(col - 1, col + 2):
-                        if (row_idx < 0 or row_idx >= self.height):
-                            continue
-                        if (col_idx < 0 or col_idx >= self.width):
-                            continue
-                        if self.get_visited(row_idx, col_idx):
-                            continue
-                        self.set_visited(row_idx, col_idx, True)
-                        if (row_idx == row and col_idx == col):
-                            continue
-                        if self.get_open(row_idx, col_idx):
-                            continue
-                        if self.get_marked(row_idx, col_idx):
-                            continue
-                        if self.board[row_idx][col_idx].get_mine() == True:
-                            continue
-                            
-                        self.set_open(row_idx, col_idx, True)
-                        if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
-                            cells_next.append((row_idx, col_idx))
-            
-            cells_curr = cells_next
+            cells_curr = [(row, col)]
             cells_next = []
+            while len(cells_curr) > 0:
+                for cell in cells_curr:
+                    row = cell[0]
+                    col = cell[1]
+                    for row_idx in range(row - 1, row + 2):
+                        for col_idx in range(col - 1, col + 2):
+                            if (row_idx < 0 or row_idx >= self.height):
+                                continue
+                            if (col_idx < 0 or col_idx >= self.width):
+                                continue
+                            if self.get_visited(row_idx, col_idx):
+                                continue
+                            self.set_visited(row_idx, col_idx, True)
+                            if (row_idx == row and col_idx == col):
+                                continue
+                            if self.get_open(row_idx, col_idx):
+                                continue
+                            if self.get_marked(row_idx, col_idx):
+                                continue
+                            if self.board[row_idx][col_idx].get_mine() == True:
+                                continue
+                                
+                            self.set_open(row_idx, col_idx, True)
+                            if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
+                                cells_next.append((row_idx, col_idx))
+                
+                cells_curr = cells_next
+                cells_next = []
+        finally:
+            self.check_status_success()
 
     def open_neighbours(self, row, col):
-        if not self.get_open(row, col):
-            return
-        if self.get_neighbour_marked_count(row, col) != self.get_neighbour_mine_count(row, col):
-            return
-        mine_exploded = False
-        for row_idx in range(row - 1, row + 2):
-            for col_idx in range(col - 1, col + 2):
-                if (row_idx < 0 or row_idx >= self.height):
-                    continue
-                if (col_idx < 0 or col_idx >= self.width):
-                    continue
-                if self.get_open(row_idx, col_idx):
-                    continue
-                if self.get_marked(row_idx, col_idx):
-                    continue
-                if self.get_mine(row_idx, col_idx):
-                    self.set_exploded(row_idx, col_idx, True)
-                    mine_exploded = True
-                if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
-                    self.open(row_idx, col_idx)
-                self.set_open(row_idx, col_idx, True)
-        if mine_exploded:
-            self.on_game_lost()
+        try:
+            if not self.get_open(row, col):
+                return
+            if self.get_neighbour_marked_count(row, col) != self.get_neighbour_mine_count(row, col):
+                return
+            mine_exploded = False
+            for row_idx in range(row - 1, row + 2):
+                for col_idx in range(col - 1, col + 2):
+                    if (row_idx < 0 or row_idx >= self.height):
+                        continue
+                    if (col_idx < 0 or col_idx >= self.width):
+                        continue
+                    if self.get_open(row_idx, col_idx):
+                        continue
+                    if self.get_marked(row_idx, col_idx):
+                        continue
+                    if self.get_mine(row_idx, col_idx):
+                        self.set_exploded(row_idx, col_idx, True)
+                        mine_exploded = True
+                    if self.get_neighbour_mine_count(row_idx, col_idx) == 0:
+                        self.open(row_idx, col_idx)
+                    self.set_open(row_idx, col_idx, True)
+            if mine_exploded:
+                self.on_game_lost()
+        finally:
+            self.check_status_success()
 
     def on_game_lost(self):
         for row_idx in range(self.height):

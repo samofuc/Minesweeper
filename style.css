@@ -122,28 +122,32 @@
     background-image: url('sprite.gif');
     background-position: -26px -55px;
     width: 26px;
-    height: 26px
+    height: 26px;
+    margin: auto;
 }
 
 .faceooh {
     background-image: url('sprite.gif');
     background-position: -52px -55px;
     width: 26px;
-    height: 26px
+    height: 26px;
+    margin: auto
 }
 
 .facedead {
     background-image: url('sprite.gif');
     background-position: -78px -55px;
     width: 26px;
-    height: 26px
+    height: 26px;
+    margin: auto
 }
 
 .facewin {
     background-image: url('sprite.gif');
     background-position: -104px -55px;
     width: 26px;
-    height: 26px
+    height: 26px;
+    margin: auto
 }
 
 .bordertl {
