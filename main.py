@@ -2,8 +2,7 @@ import bottle
 import Board
 import os, sys
 
-board = Board.Board(15,15,40)
-
+board = Board.Board(9,9,5)
 app_dir = os.path.dirname(sys.argv[0])
 
 @bottle.route('/<filename:re:.*\.css>')
@@ -20,7 +19,7 @@ def osnovna_stran():
 
 @bottle.post('/new/')
 def new_game():
-    board.init(15, 15, 40)
+    board.init(board.get_width(), board.get_height(), board.get_mine_count())
     bottle.redirect('/')
 
 @bottle.post('/open/')
