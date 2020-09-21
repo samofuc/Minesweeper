@@ -1,6 +1,6 @@
 %rebase('base.html')
 <script>
-    function mouse_click(event, x, row, col) {
+    function board_cell_click(event, x, row, col) {
         if (typeof event ==="object") {
             switch (event.which) {
                 case 1:
@@ -19,19 +19,100 @@
         }
         document.getElementById("selected_row").value = row;
         document.getElementById("selected_col").value = col;
-        document.forms["game"].submit();
+        document.forms["Board"].submit();
     }
+
+    function new_game_click(event, x) {
+        document.forms["Header"].submit();
+    }    
 </script>
 
-<form name="New game" action ="/new/" method="POST">
-    <input type="submit" value="New game">
+<h1>Minolovec</h1>
+
+<form name="Header" action ="/new/" method="POST">
+<table cellspacing=0 cellpadding=0>
+    <tr>
+        %for col in range(board.get_width() + 2):
+        <td>
+            %if col == 0:
+            %    css_class = "bordertl"
+            %elif col == board.get_width() + 1:
+            %    css_class = "bordertr"
+            %else:
+            %    css_class = "bordertb"
+            %end
+            <div oncontextmenu="event.preventDefault();" class={{css_class}}></div>
+        </td>
+        %end
+    </tr>
+    <tr>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="borderlrlong"></div>
+        </td>
+        %mc_orig = board.get_remaining_mine_count()
+        %mc_neg = (mc_orig < 0)
+        %mc = abs(mc_orig)
+        %t1 = mc % 10
+        %mc = mc // 10
+        %t10 = mc % 10
+        %mc = mc // 10
+        %t100 = mc % 10
+
+        %if (mc_neg):
+        %   time100 = "time-"
+        %else:
+        %   time100 = "time" + str(t100)
+        %end
+        %time10 = "time" + str(t10)
+        %time1 = "time" + str(t1)
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="{{time100}}"></div>
+        </td>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="{{time10}}"></div>
+        </td>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="{{time1}}"></div>
+        </td>
+        %cells_together = board.get_width() - 6
+        <td colspan="{{cells_together}}">
+            <div
+                oncontextmenu="event.preventDefault();" 
+                onmouseup="new_game_click(event, this)"
+                class="facesmile">
+        </td>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="time0"></div>
+        </td>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="time0"></div>
+        </td>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="time0"></div>
+        </td>
+        <td>
+            <div oncontextmenu="event.preventDefault();" class="borderlrlong"></div>
+        </td>
+    </tr>
+</table>
 </form>
 
-<p>Stevilo preostalih min: {{board.get_remaining_mine_count()}}</p>
-
-<form name="game" action="/open/" method="POST">
-    <h1>Igra</h1>
-    <table cellspacing=0 cellpadding=0>
+<form name="Board" action="/open/" method="POST">
+<table cellspacing=0 cellpadding=0>
+    <tr>
+        %for col in range(board.get_width() + 2):
+        <td>
+            %if col == 0:
+            %    css_class = "borderjointl"
+            %elif col == board.get_width() + 1:
+            %    css_class = "borderjointr"
+            %else:
+            %    css_class = "bordertb"
+            %end
+            <div oncontextmenu="event.preventDefault();" class="{{css_class}}"></div>
+        </td>
+        %end
+    </tr>
     %for row in range(board.get_height()):
     <tr>
         <td>
@@ -65,7 +146,7 @@
             %if board.is_game_in_progress():
             <div
                 oncontextmenu="event.preventDefault();"
-                onmouseup="mouse_click(event, this, {{row}}, {{col}})"
+                onmouseup="board_cell_click(event, this, {{row}}, {{col}})"
                 class="{{css_class}}">
             %else:
             <div
@@ -79,6 +160,20 @@
         </td>
     </tr>
     %end
+    <tr>
+        %for col in range(board.get_width() + 2):
+        <td>
+            %if col == 0:
+            %    css_class = "borderbl"
+            %elif col == board.get_width() + 1:
+            %    css_class = "borderbr"
+            %else:
+            %    css_class = "bordertb"
+            %end
+            <div oncontextmenu="event.preventDefault();" class="{{css_class}}"></div>
+        </td>
+        %end
+    </tr>
     </table>
     <input type="text" id="mouse_button" name="mouse_button" value="" style="display: none">
     <input type="number" id="selected_row" name="selected_row" value="" style="display: none">

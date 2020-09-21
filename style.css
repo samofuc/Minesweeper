@@ -114,7 +114,8 @@
     background-image: url('sprite.gif');
     background-position: 0 -55px;
     width: 26px;
-    height: 26px
+    height: 26px;
+    margin: auto;
 }
 
 .facepressed {
