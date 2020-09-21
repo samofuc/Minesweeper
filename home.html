@@ -33,7 +33,7 @@
 <table cellspacing=0 cellpadding=0>
     <tr>
         %for col in range(board.get_width() + 2):
-        <td>
+        <td> 
             %if col == 0:
             %    css_class = "bordertl"
             %elif col == board.get_width() + 1:
@@ -65,19 +65,19 @@
         %end
         %time10 = "time" + str(t10)
         %time1 = "time" + str(t1)
-        <td colspan="3">
+        <td colspan="3" class="blank">
             <div oncontextmenu="event.preventDefault();" class="{{time100}} mines_hundreds"></div>
             <div oncontextmenu="event.preventDefault();" class="{{time10}} mines_tens"></div>
             <div oncontextmenu="event.preventDefault();" class="{{time1}} mines_ones"></div>
         </td>
         %cells_together = board.get_width() - 6
-        <td colspan="{{cells_together}}">
+        <td colspan="{{cells_together}}" class="blank">
             <div
                 oncontextmenu="event.preventDefault();" 
                 onmouseup="new_game_click(event, this)"
                 class="facesmile">
         </td>
-        <td colspan="3">
+        <td colspan="3" class="blank">
             <div oncontextmenu="event.preventDefault();" class="time0 seconds_hundreds"></div>
             <div oncontextmenu="event.preventDefault();" class="time0 seconds_tens"></div>
             <div oncontextmenu="event.preventDefault();" class="time0 seconds_ones"></div>

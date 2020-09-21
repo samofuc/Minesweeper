@@ -316,4 +316,6 @@
     float: left
 }
 
-
+.blank {
+    background-color:lightgrey;
+}
