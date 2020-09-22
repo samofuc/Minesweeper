@@ -179,26 +179,73 @@
     <input type="number" id="selected_col" name="selected_col" value="" style="display: none">  
 </form>
 
-<!-- Trigger/Open The Modal -->
 <button id="myBtn">Open Modal</button>
 
-<!-- The Modal -->
-<div id="gameSettingsDialog" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Modal Header</h2>
+<form name="GameSettings" action="/configure/" method="POST">
+    <div id="gameSettingsDialog" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Nastavitve igre</h2>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th class="align_center">Width</th>
+                        <th class="align_center">Height</th>
+                        <th class="align_center">Mines</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="easy" name="game_level" value="easy" checked="checked">
+                            <label for="easy">Easy</label>
+                        </td>
+                        <td class="align_center">9</td>
+                        <td class="align_center">9</td>
+                        <td class="align_center">10</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="medium" name="game_level" value="medium">
+                            <label for="medium">Medium</label>
+                        </td>
+                        <td class="align_center">16</td>
+                        <td class="align_center">16</td>
+                        <td class="align_center">40</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="hard" name="game_level" value="hard">
+                            <label for="hard">Hard</label>
+                        </td>
+                        <td class="align_center">30</td>
+                        <td class="align_center">16</td>
+                        <td class="align_center">99</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="custom" name="game_level" value="custom">
+                            <label for="custom">Custom</label>
+                        </td>
+                        <td>
+                            <input type="text" id="custom-width" name="custom-width" value="30" class="align_center">
+                        </td>
+                        <td>
+                            <input type="text" id="custom-height" name="custom-height" value="20" class="align_center">
+                        </td>
+                        <td>
+                            <input type="text" id="custom-mines" name="custom-mines" value="145" class="align_center">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value ="New Game">
+            </div>
+        </div>
     </div>
-    <div class="modal-body">
-      <p>Some text in the Modal Body</p>
-      <p>Some other text...</p>
-    </div>
-    <div class="modal-footer">
-      <h3>Modal Footer</h3>
-    </div>
-  </div>
-</div>
+</form>
 
 <script>
 // Get the modal

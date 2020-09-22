@@ -19,7 +19,7 @@ def get_board():
     if (id == None or boards.get(id) == None):
         id = str(uuid.uuid1())
         bottle.response.set_cookie('Minesweeper_player', id, path='/')
-        boards[id] = Board.Board(9,9,5)
+        boards[id] = Board.Board(9,9,10)
 
     return boards[id]
 
@@ -31,6 +31,23 @@ def osnovna_stran():
 def new_game():
     board = get_board()
     board.init(board.get_width(), board.get_height(), board.get_mine_count())
+    bottle.redirect('/')
+
+@bottle.post('/configure/')
+def configure_game():
+    game_level = bottle.request.forms['game_level']
+    board = get_board()
+    if game_level == 'easy':
+        board.init(9, 9, 10)
+    elif game_level == 'medium':
+        board.init(16, 16, 40)
+    elif game_level == 'hard':
+        board.init(30, 16, 99)
+    else:
+        w = int(bottle.request.forms['custom-width'])
+        h = int(bottle.request.forms['custom-height'])
+        m = max(int(bottle.request.forms['custom-mines']), w*h)
+        board.init(w, h, m)
     bottle.redirect('/')
 
 @bottle.post('/open/')

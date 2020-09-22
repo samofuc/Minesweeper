@@ -380,3 +380,7 @@
     background-color: #5cb85c;
     color: white;
 }
+
+.align_center {
+    text-align:center;
+}
