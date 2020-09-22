@@ -27,7 +27,9 @@
     }    
 </script>
 
-<h1>Minolovec</h1>
+<h1>Minesweeper</h1>
+
+<span id="GameSettingsBtn" class="game-settings-btn">Game</span>
 
 <form name="Header" action ="/new/" method="POST">
 <table cellspacing=0 cellpadding=0>
@@ -179,14 +181,12 @@
     <input type="number" id="selected_col" name="selected_col" value="" style="display: none">  
 </form>
 
-<button id="myBtn">Open Modal</button>
-
-<form name="GameSettings" action="/configure/" method="POST">
+<form name="GameSettingsForm" action="/configure/" method="POST">
     <div id="gameSettingsDialog" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Nastavitve igre</h2>
+                <p>Game Options</p>
             </div>
             <div class="modal-body">
                 <table>
@@ -252,7 +252,7 @@
 var modal = document.getElementById("gameSettingsDialog");
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("GameSettingsBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];

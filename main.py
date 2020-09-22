@@ -44,9 +44,9 @@ def configure_game():
     elif game_level == 'hard':
         board.init(30, 16, 99)
     else:
-        w = int(bottle.request.forms['custom-width'])
-        h = int(bottle.request.forms['custom-height'])
-        m = max(int(bottle.request.forms['custom-mines']), w*h)
+        w = max(int(bottle.request.forms['custom-width']), 9)
+        h = max(int(bottle.request.forms['custom-height']), 9)
+        m = min(int(bottle.request.forms['custom-mines']), w*h)
         board.init(w, h, m)
     bottle.redirect('/')
 
