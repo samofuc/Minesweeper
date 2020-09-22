@@ -49,6 +49,7 @@ class Board:
             self.remaining_mine_count -= 1
         else:
             self.remaining_mine_count += 1
+        self.check_status_success()
     
     def get_remaining_mine_count(self):
         return self.remaining_mine_count
